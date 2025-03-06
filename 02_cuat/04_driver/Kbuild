@@ -1,0 +1,5 @@
+# Especifica el objeto principal del módulo
+obj-m += td3_i2c_fcc.o
+
+# Especifica la ruta del archivo fuente
+td3_i2c_fcc-objs := platform-driver/src/td3_i2c_fcc.o

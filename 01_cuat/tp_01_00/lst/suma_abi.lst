@@ -1,0 +1,43 @@
+ARM GAS  src/suma_abi.s 			page 1
+
+
+   1              	.extern suma_c
+   2              	.extern mult_c
+   3              	.extern _PUBLIC_STACK_INIT
+   4              	
+   5              	.global _start
+   6              	.code 32
+   7              	.section .text
+   8              	
+   9              	_start:
+  10 0000 20D09FE5 	    LDR SP,=_PUBLIC_STACK_INIT
+  11              	
+  12 0004 1000A0E3 	    MOV R0, #0x10
+  13 0008 2010A0E3 	    MOV R1, #0x20
+  14              	
+  15              	    /*B suma_c*/
+  16              	
+  17 000c 18A09FE5 	    LDR R10, =suma_c    @Direccion de la funcion ensamblada
+  18 0010 0FE0A0E1 	    MOV LR, PC
+  19 0014 1AFF2FE1 	    BX R10
+  20              	
+  21 0018 10A09FE5 	    LDR R10, =mult_c
+  22 001c 0FE0A0E1 	    MOV LR, PC
+  23 0020 1AFF2FE1 	    BX R10
+  24              	
+  25 0024 FEFFFFEA 	    B .     @Branch a este lugar infinitas veces parecido a while (1)
+  26 0028 00000000 	.end
+  26      00000000 
+  26      00000000 
+ARM GAS  src/suma_abi.s 			page 2
+
+
+DEFINED SYMBOLS
+      src/suma_abi.s:9      .text:0000000000000000 _start
+      src/suma_abi.s:10     .text:0000000000000000 $a
+      src/suma_abi.s:26     .text:0000000000000028 $d
+
+UNDEFINED SYMBOLS
+_PUBLIC_STACK_INIT
+suma_c
+mult_c
